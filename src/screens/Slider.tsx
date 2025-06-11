@@ -1,11 +1,9 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import CustomButton from '../components/CustomButton';
 
 const sliderStyles = StyleSheet.create({
   mainContainer: {
-    marginVertical: 70,
-    paddingHorizontal: 16,
-    paddingVertical: 40,
+    paddingHorizontal: 10,
   },
   headers: {
     flexDirection: 'row',
@@ -14,13 +12,13 @@ const sliderStyles = StyleSheet.create({
     marginBottom: 20,
   },
   content: {
-    marginVertical: 70,
     alignSelf: 'center',
   },
   numberContainer: {
     borderWidth: 1,
     borderColor: 'black',
-    paddingHorizontal: 170,
+    width: '100%',
+    height: '40%',
     borderRadius: 5,
     alignSelf: 'center',
     justifyContent: 'center',
