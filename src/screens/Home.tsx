@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {getPopularMovies} from '../utils/service/TMDBService';
 
 const styles = StyleSheet.create({
   container: {
@@ -11,6 +12,12 @@ const styles = StyleSheet.create({
 });
 
 const Home = () => {
+  useEffect(() => {
+    getPopularMovies().then(data => {
+      console.log(data);
+    });
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text>Home Component</Text>
