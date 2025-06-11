@@ -33,16 +33,6 @@ const sliderStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  buttonStyle: {
-    color: 'green',
-    paddingVertical: 10,
-    borderRadius: 5,
-  },
-  buttonTextStyle: {
-    color: 'white',
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
 });
 
 const Slider = () => {
