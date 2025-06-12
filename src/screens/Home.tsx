@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     paddingVertical: 40,
     backgroundColor: '#000000',
     flex: 1,
-    minHeight: '40%',
+    minHeight: '20%',
   },
   heading: {
     fontSize: 22,

@@ -1,62 +1,56 @@
-import {StyleSheet, Text, View} from 'react-native';
-import CustomButton from '../components/CustomButton';
+import * as React from 'react';
+import {Dimensions, Text, View} from 'react-native';
+import {useSharedValue} from 'react-native-reanimated';
+import Carousel, {
+  ICarouselInstance,
+  Pagination,
+} from 'react-native-reanimated-carousel';
 
-const sliderStyles = StyleSheet.create({
-  mainContainer: {
-    paddingHorizontal: 10,
-  },
-  headers: {
-    flexDirection: 'row',
-    gap: 20,
-    alignSelf: 'center',
-    marginBottom: 20,
-  },
-  content: {
-    alignSelf: 'center',
-  },
-  numberContainer: {
-    borderWidth: 1,
-    borderColor: 'black',
-    width: '100%',
-    height: '40%',
-    borderRadius: 5,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    gap: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+const data = [...new Array(6).keys()];
+const width = Dimensions.get('window').width;
 
 const Slider = () => {
+  const ref = React.useRef<ICarouselInstance>(null);
+  const progress = useSharedValue<number>(0);
+
+  const onPressPagination = (index: number) => {
+    ref.current?.scrollTo({
+      /**
+       * Calculate the difference between the current index and the target index
+       * to ensure that the carousel scrolls to the nearest index
+       */
+      count: index - progress.value,
+      animated: true,
+    });
+  };
+
   return (
-    <View style={sliderStyles.mainContainer}>
-      <View style={sliderStyles.headers}>
-        <Text>My list</Text>
-        <Text>Discover</Text>
-      </View>
-      <View style={sliderStyles.numberContainer}>
-        <View style={sliderStyles.content}>
-          <Text>1</Text>
-        </View>
-      </View>
-      <View style={sliderStyles.buttonContainer}>
-        <View>
-          <CustomButton onPress={() => {}}>
-            <Text>Wishlist</Text>
-          </CustomButton>
-        </View>
-        <View>
-          <CustomButton onPress={() => {}}>
-            <Text>Details</Text>
-          </CustomButton>
-        </View>
-      </View>
+    <View style={{flex: 1}}>
+      <Carousel
+        ref={ref}
+        width={width}
+        height={width / 2}
+        data={data}
+        onProgressChange={progress}
+        renderItem={({index}) => (
+          <View
+            style={{
+              flex: 1,
+              borderWidth: 1,
+              justifyContent: 'center',
+            }}>
+            <Text style={{textAlign: 'center', fontSize: 30}}>{index}</Text>
+          </View>
+        )}
+      />
+
+      <Pagination.Basic
+        progress={progress}
+        data={data}
+        dotStyle={{backgroundColor: 'rgba(0,0,0,0.2)', borderRadius: 50}}
+        containerStyle={{gap: 5, marginTop: 10}}
+        onPress={onPressPagination}
+      />
     </View>
   );
 };
