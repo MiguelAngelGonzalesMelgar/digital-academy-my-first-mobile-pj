@@ -16,6 +16,7 @@ import Carousel, {
 import {getPopularMovies} from '../utils/service/TMDBService';
 import {Movie} from '../components/Movies';
 import {getTopRatedMovies} from '../utils/service/topRatedMovies';
+import CustomButton from '../components/CustomButton';
 
 const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
@@ -109,6 +110,26 @@ const Slider = () => {
           </View>
         )}
       />
+      <View style={styles.textOverlayContainer}>
+        <Text style={styles.overlayText}>My list</Text>
+        <Text style={styles.overlayText}>Discover</Text>
+      </View>
+      <View style={styles.fixedButtonContainer}>
+        <CustomButton
+          onPress={() => console.log('Add to Wishlist')}
+          backgroundColor="#2d2d2d"
+          style={styles.floatingButton}
+          textStyle={{fontSize: 16, fontWeight: '400'}}>
+          + Wishlist
+        </CustomButton>
+        <CustomButton
+          onPress={() => console.log('Go to Details')}
+          backgroundColor="#F3C15D"
+          style={styles.floatingButton}
+          textStyle={{fontSize: 16, color: 'black', fontWeight: '400'}}>
+          Details
+        </CustomButton>
+      </View>
       <Pagination.Basic
         progress={progress}
         data={movies}
@@ -155,6 +176,7 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     marginHorizontal: 4,
+    marginVertical: 10,
   },
   paginationContainer: {
     flexDirection: 'row',
@@ -163,6 +185,40 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     alignSelf: 'center',
     paddingHorizontal: 10,
+  },
+  textOverlayContainer: {
+    position: 'absolute',
+    bottom: 100,
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 50,
+    alignItems: 'center',
+    zIndex: 20,
+  },
+  overlayText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'light',
+  },
+  fixedButtonContainer: {
+    position: 'absolute',
+    bottom: 30,
+    flexDirection: 'row',
+    gap: 10,
+    zIndex: 10,
+    alignSelf: 'center',
+    opacity: 0.99,
+  },
+
+  floatingButton: {
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 10,
+    marginLeft: 8,
+    width: 160,
+    height: 50,
   },
 });
 
