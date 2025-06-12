@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
@@ -27,7 +27,7 @@ const PAGINATION_HEIGHT = 30;
 const Slider = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = React.useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchMovies = async () => {

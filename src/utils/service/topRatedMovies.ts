@@ -1,5 +1,3 @@
-import {Movie} from '../../components/Movies';
-
 interface Movies {
   id: string;
   vote_average: number;
