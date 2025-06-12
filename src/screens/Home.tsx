@@ -1,22 +1,30 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {getPopularMovies} from '../utils/service/TMDBService';
 import Movies, {Movie} from '../components/Movies';
+import Slider from './Slider';
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 70,
-    paddingHorizontal: 16,
-    paddingVertical: 40,
     backgroundColor: '#000000',
     flex: 1,
-    minHeight: '20%',
   },
   heading: {
     fontSize: 22,
     fontWeight: 'bold',
     color: '#fff',
     marginBottom: 10,
+    marginLeft: 10,
+  },
+  contentContainer: {
+    flex: 1,
+    paddingHorizontal: 10,
   },
 });
 
@@ -35,12 +43,17 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Popular Movies</Text>
-      {isLoading ? (
-        <ActivityIndicator size="large" color="#fff" />
-      ) : (
-        <Movies movies={movies} />
-      )}
+      <Slider />
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        <View style={styles.contentContainer}>
+          <Text style={styles.heading}>Popular Movies</Text>
+          {isLoading ? (
+            <ActivityIndicator size="large" color="#fff" />
+          ) : (
+            <Movies movies={movies} />
+          )}
+        </View>
+      </ScrollView>
     </View>
   );
 };
