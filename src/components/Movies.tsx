@@ -5,6 +5,7 @@ const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingBottom: 20,
   },
   image: {
     width: 180,

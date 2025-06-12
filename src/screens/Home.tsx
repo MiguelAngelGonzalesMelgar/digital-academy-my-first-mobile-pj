@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     paddingHorizontal: 10,
+    marginTop: 10,
   },
 });
 
@@ -43,8 +44,8 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-      <Slider />
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        <Slider />
         <View style={styles.contentContainer}>
           <Text style={styles.heading}>Popular Movies</Text>
           {isLoading ? (

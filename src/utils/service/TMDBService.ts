@@ -10,7 +10,6 @@ export const getPopularMovies = async () => {
       },
       params: {
         language: 'en-US',
-        page: 1,
       },
     });
     return response.data.results;
