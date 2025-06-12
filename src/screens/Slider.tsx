@@ -15,10 +15,13 @@ import Carousel, {
 } from 'react-native-reanimated-carousel';
 import {getPopularMovies} from '../utils/service/TMDBService';
 import {Movie} from '../components/Movies';
+import {getTopRatedMovies} from '../utils/service/topRatedMovies';
 
 const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
 const {width, height} = Dimensions.get('window');
+const SLIDER_HEIGHT = height * 0.5;
+const PAGINATION_HEIGHT = 30;
 
 const Slider = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -33,8 +36,9 @@ const Slider = () => {
 
         const results = await getPopularMovies();
         if (Array.isArray(results)) {
-          const top5Movies = results.slice(5);
-          setMovies(top5Movies);
+          const topRatedMovies = getTopRatedMovies(results);
+          setMovies(topRatedMovies);
+          console.log(topRatedMovies);
         }
       } catch (error: any) {
         console.error('Error fetching popular movies:', error);
@@ -87,11 +91,12 @@ const Slider = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, {height: SLIDER_HEIGHT + PAGINATION_HEIGHT}]}>
       <Carousel
         ref={ref}
         width={width}
-        height={height * 0.4}
+        height={SLIDER_HEIGHT}
         data={movies}
         onProgressChange={progress}
         renderItem={({item}) => (
@@ -104,11 +109,13 @@ const Slider = () => {
           </View>
         )}
       />
-
       <Pagination.Basic
         progress={progress}
         data={movies}
         dotStyle={styles.paginationDot}
+        activeDotStyle={{
+          backgroundColor: '#F3C15D',
+        }}
         containerStyle={styles.paginationContainer}
         onPress={onPressPagination}
       />
@@ -118,8 +125,8 @@ const Slider = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#000000',
+    marginBottom: 20,
   },
   centerContainer: {
     flex: 1,
@@ -133,25 +140,29 @@ const styles = StyleSheet.create({
   },
   slideContainer: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
     borderRadius: 8,
-    overflow: 'hidden',
-    marginHorizontal: 5,
+    marginTop: 5,
   },
   slideImage: {
-    width: '100%',
+    width: '90%',
     height: '100%',
   },
   paginationDot: {
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: '#ffffff',
     borderRadius: 50,
+    width: 8,
+    height: 8,
+    marginHorizontal: 4,
   },
   paginationContainer: {
-    gap: 5,
-    marginTop: 10,
-    paddingBottom: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingTop: 10,
+    paddingBottom: 10,
+    alignSelf: 'center',
+    paddingHorizontal: 10,
   },
 });
 
