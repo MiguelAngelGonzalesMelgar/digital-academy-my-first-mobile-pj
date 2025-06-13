@@ -45,10 +45,10 @@ const Movies = ({movies, showMovieTitle = true}: MoviesProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
   },
   movieItemContainer: {
-    marginHorizontal: 10,
+    marginHorizontal: 5,
     alignItems: 'center',
     width: 150,
   },
