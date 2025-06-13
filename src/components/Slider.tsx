@@ -18,6 +18,7 @@ import {Movie} from './Movies';
 import {getTopRatedMovies} from '../utils/service/topRatedMovies';
 import FMButton from './FMButton';
 import {POSTER_BASE_URL} from '@env';
+import LinearGradient from 'react-native-linear-gradient';
 
 const {width} = Dimensions.get('window');
 const SLIDER_HEIGHT = width / (2.5 / 3); //2.5:3 ratio
@@ -105,6 +106,10 @@ const Slider = () => {
               source={{uri: `${POSTER_BASE_URL}${item.poster_path}`}}
               style={styles.slideImage}
             />
+            <LinearGradient
+              colors={['transparent', 'rgb(0, 0, 0)']}
+              style={styles.transparentGradient}
+            />
           </View>
         )}
       />
@@ -160,7 +165,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'black',
     borderRadius: 8,
-    marginTop: 5,
     overflow: 'hidden',
   },
   slideImage: {
@@ -183,6 +187,13 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     alignSelf: 'center',
     paddingHorizontal: 10,
+  },
+  transparentGradient: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    height: 300,
   },
   textOverlayContainer: {
     position: 'absolute',
@@ -207,7 +218,7 @@ const styles = StyleSheet.create({
     gap: 10,
     zIndex: 10,
     alignSelf: 'center',
-    opacity: 0.99,
+    opacity: 0.9,
   },
 
   floatingButton: {
