@@ -26,13 +26,11 @@ const PAGINATION_HEIGHT = 30;
 
 const Slider = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        setIsLoading(true);
         setError(null);
 
         const results = await getRecentMovies();
@@ -49,7 +47,6 @@ const Slider = () => {
         );
         setMovies([]);
       } finally {
-        setIsLoading(false);
       }
     };
     fetchMovies();
@@ -65,27 +62,10 @@ const Slider = () => {
     });
   };
 
-  if (isLoading) {
-    return (
-      <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#0000ff" />
-        <Text style={styles.statusText}>Loading movies...</Text>
-      </View>
-    );
-  }
-
   if (error) {
     return (
       <View style={styles.centerContainer}>
         <Text>Error: {error}</Text>
-      </View>
-    );
-  }
-
-  if (movies.length === 0) {
-    return (
-      <View style={styles.centerContainer}>
-        <Text style={styles.statusText}>No movies found.</Text>
       </View>
     );
   }

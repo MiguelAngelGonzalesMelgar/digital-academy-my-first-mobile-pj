@@ -1,5 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, ScrollView, StyleSheet, View} from 'react-native';
+import {
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {getBestMovies, getMarvelMovies} from '../utils/service/TMDBService';
 import Movies, {Movie} from '../components/Movies';
 import Slider from '../components/Slider';
@@ -37,7 +43,10 @@ const Home = () => {
         <Slider />
         <View style={styles.contentContainer}>
           {isLoading ? (
-            <ActivityIndicator size="large" color="#fff" />
+            <>
+              <ActivityIndicator size="large" color="#F3C15D" />
+              <Text style={styles.statusText}>Loading movies...</Text>
+            </>
           ) : (
             <>
               <CarouselHeader title="Marvel Studios" onLinkPress={() => {}} />
@@ -68,6 +77,12 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 10,
     marginTop: 10,
+  },
+  statusText: {
+    marginTop: 10,
+    fontSize: 16,
+    color: '#666',
+    alignSelf: 'center',
   },
 });
 
