@@ -21,7 +21,7 @@ import CustomButton from '../components/CustomButton';
 const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
 const {width, height} = Dimensions.get('window');
-const SLIDER_HEIGHT = height * 0.5;
+const SLIDER_HEIGHT = width / (2.7 / 3);
 const PAGINATION_HEIGHT = 30;
 
 const Slider = () => {
@@ -105,7 +105,6 @@ const Slider = () => {
             <Image
               source={{uri: `${POSTER_BASE_URL}${item.poster_path}`}}
               style={styles.slideImage}
-              resizeMode="cover"
             />
           </View>
         )}
@@ -147,7 +146,6 @@ const Slider = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#000000',
-    marginBottom: 20,
   },
   centerContainer: {
     flex: 1,
@@ -161,14 +159,15 @@ const styles = StyleSheet.create({
   },
   slideContainer: {
     flex: 1,
-    alignItems: 'center',
     backgroundColor: 'black',
     borderRadius: 8,
     marginTop: 5,
+    overflow: 'hidden',
   },
   slideImage: {
-    width: '90%',
+    width: '100%',
     height: '100%',
+    resizeMode: 'cover',
   },
   paginationDot: {
     backgroundColor: '#ffffff',
@@ -204,7 +203,7 @@ const styles = StyleSheet.create({
   },
   fixedButtonContainer: {
     position: 'absolute',
-    bottom: 30,
+    bottom: 40,
     flexDirection: 'row',
     gap: 10,
     zIndex: 10,

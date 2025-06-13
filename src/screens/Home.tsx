@@ -9,25 +9,7 @@ import {
 import {getPopularMovies} from '../utils/service/TMDBService';
 import Movies, {Movie} from '../components/Movies';
 import Slider from './Slider';
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#000000',
-    flex: 1,
-  },
-  heading: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#fff',
-    marginBottom: 10,
-    marginLeft: 10,
-  },
-  contentContainer: {
-    flex: 1,
-    paddingHorizontal: 10,
-    marginTop: 10,
-  },
-});
+import CarouselHeader from '../components/CarouselHeader';
 
 const Home = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -47,7 +29,7 @@ const Home = () => {
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <Slider />
         <View style={styles.contentContainer}>
-          <Text style={styles.heading}>Popular Movies</Text>
+          <CarouselHeader title="MarvelStudios" onLinkPress={() => {}} />
           {isLoading ? (
             <ActivityIndicator size="large" color="#fff" />
           ) : (
@@ -58,5 +40,24 @@ const Home = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#000000',
+    flex: 1,
+  },
+  heading: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 10,
+    marginLeft: 10,
+  },
+  contentContainer: {
+    flex: 1,
+    paddingHorizontal: 10,
+    marginTop: 10,
+  },
+});
 
 export default Home;
