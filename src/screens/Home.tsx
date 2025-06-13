@@ -8,11 +8,12 @@ import {
 } from 'react-native';
 import {getPopularMovies} from '../utils/service/TMDBService';
 import Movies, {Movie} from '../components/Movies';
-import Slider from './Slider';
+import Slider from '../components/Slider';
 import CarouselHeader from '../components/CarouselHeader';
 
 const Home = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [bestMovies, setBestmovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
     getPopularMovies()
@@ -29,11 +30,15 @@ const Home = () => {
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <Slider />
         <View style={styles.contentContainer}>
-          <CarouselHeader title="MarvelStudios" onLinkPress={() => {}} />
           {isLoading ? (
             <ActivityIndicator size="large" color="#fff" />
           ) : (
-            <Movies movies={movies} />
+            <>
+              <CarouselHeader title="Marvel Studios" onLinkPress={() => {}} />
+              <Movies movies={movies} />
+              <CarouselHeader title="Best movies" onLinkPress={() => {}} />
+              <Movies movies={movies} showMovieTitle={false} />
+            </>
           )}
         </View>
       </ScrollView>
