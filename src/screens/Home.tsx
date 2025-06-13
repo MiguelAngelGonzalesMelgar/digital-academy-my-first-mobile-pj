@@ -1,18 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, ScrollView, StyleSheet, View} from 'react-native';
-import {getPopularMovies} from '../utils/service/TMDBService';
+import {getBestMovies} from '../utils/service/TMDBService';
 import Movies, {Movie} from '../components/Movies';
 import Slider from '../components/Slider';
 import CarouselHeader from '../components/CarouselHeader';
 
 const Home = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [bestMovies, setBestmovies] = useState<Movie[]>([]);
+  const [bestMovies, setBestMovies] = useState<Movie[]>([]);
+  const [marvelMovies, setMarvelBestmovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
-    getPopularMovies()
+    getBestMovies()
       .then(data => {
-        setMovies(data || []);
+        setBestMovies(data || []);
       })
       .finally(() => {
         setIsLoading(false);
@@ -29,9 +29,9 @@ const Home = () => {
           ) : (
             <>
               <CarouselHeader title="Marvel Studios" onLinkPress={() => {}} />
-              <Movies movies={movies} />
+              <Movies movies={bestMovies} />
               <CarouselHeader title="Best movies" onLinkPress={() => {}} />
-              <Movies movies={movies} showMovieTitle={false} />
+              <Movies movies={bestMovies} showMovieTitle={false} />
             </>
           )}
         </View>
