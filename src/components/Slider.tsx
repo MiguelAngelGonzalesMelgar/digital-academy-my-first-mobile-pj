@@ -13,7 +13,7 @@ import Carousel, {
   ICarouselInstance,
   Pagination,
 } from 'react-native-reanimated-carousel';
-import {getPopularMovies} from '../utils/service/TMDBService';
+import {getRecentMovies} from '../utils/service/TMDBService';
 import {Movie} from './Movies';
 import {getTopRatedMovies} from '../utils/service/topRatedMovies';
 import FMButton from './FMButton';
@@ -34,11 +34,10 @@ const Slider = () => {
         setIsLoading(true);
         setError(null);
 
-        const results = await getPopularMovies();
+        const results = await getRecentMovies();
         if (Array.isArray(results)) {
           const topRatedMovies = getTopRatedMovies(results);
           setMovies(topRatedMovies);
-          console.log(topRatedMovies);
         }
       } catch (error: any) {
         console.error('Error fetching popular movies:', error);
