@@ -9,7 +9,7 @@ interface CarouselHeaderProps {
 const CarouselHeader = ({title, onLinkPress}: CarouselHeaderProps) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.titleText}>{title}</Text>{' '}
+      <Text style={styles.titleText}>{title}</Text>
       <TouchableOpacity
         onPress={onLinkPress}
         style={styles.linkButton}
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   linkText: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
     color: '#F3C15D',
   },

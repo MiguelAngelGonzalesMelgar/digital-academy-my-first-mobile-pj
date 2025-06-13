@@ -14,9 +14,9 @@ import Carousel, {
   Pagination,
 } from 'react-native-reanimated-carousel';
 import {getPopularMovies} from '../utils/service/TMDBService';
-import {Movie} from '../components/Movies';
+import {Movie} from './Movies';
 import {getTopRatedMovies} from '../utils/service/topRatedMovies';
-import CustomButton from '../components/CustomButton';
+import FMButton from './FMButton';
 
 const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
@@ -114,20 +114,20 @@ const Slider = () => {
         <Text style={styles.overlayText}>Discover</Text>
       </View>
       <View style={styles.fixedButtonContainer}>
-        <CustomButton
+        <FMButton
           onPress={() => console.log('Add to Wishlist')}
           backgroundColor="#2d2d2d"
           style={styles.floatingButton}
           textStyle={{fontSize: 16, fontWeight: '400'}}>
           + Wishlist
-        </CustomButton>
-        <CustomButton
+        </FMButton>
+        <FMButton
           onPress={() => console.log('Go to Details')}
           backgroundColor="#F3C15D"
           style={styles.floatingButton}
           textStyle={{fontSize: 16, color: 'black', fontWeight: '400'}}>
           Details
-        </CustomButton>
+        </FMButton>
       </View>
       <Pagination.Basic
         progress={progress}

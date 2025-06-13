@@ -16,7 +16,7 @@ type CustomButtonProps = {
   textStyle?: TextStyle;
 };
 
-const CustomButton = ({
+const FMButton = ({
   onPress,
   children,
   backgroundColor = 'green',
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CustomButton;
+export default FMButton;
