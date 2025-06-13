@@ -1,11 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  ActivityIndicator,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {ActivityIndicator, ScrollView, StyleSheet, View} from 'react-native';
 import {getPopularMovies} from '../utils/service/TMDBService';
 import Movies, {Movie} from '../components/Movies';
 import Slider from '../components/Slider';

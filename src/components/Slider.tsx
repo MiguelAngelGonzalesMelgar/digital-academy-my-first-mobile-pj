@@ -17,11 +17,10 @@ import {getPopularMovies} from '../utils/service/TMDBService';
 import {Movie} from './Movies';
 import {getTopRatedMovies} from '../utils/service/topRatedMovies';
 import FMButton from './FMButton';
+import {POSTER_BASE_URL} from '@env';
 
-const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w500';
-
-const {width, height} = Dimensions.get('window');
-const SLIDER_HEIGHT = width / (2.7 / 3);
+const {width} = Dimensions.get('window');
+const SLIDER_HEIGHT = width / (2.5 / 3); //2.5:3 ratio
 const PAGINATION_HEIGHT = 30;
 
 const Slider = () => {

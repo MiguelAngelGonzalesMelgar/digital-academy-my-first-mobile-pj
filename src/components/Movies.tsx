@@ -1,7 +1,6 @@
 import {FlatList, Image, StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-gesture-handler';
-
-const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+import {POSTER_BASE_URL} from '@env';
 
 export interface Movie {
   id: string;
