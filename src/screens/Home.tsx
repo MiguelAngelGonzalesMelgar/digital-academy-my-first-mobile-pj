@@ -52,7 +52,7 @@ const Home = () => {
               <CarouselHeader title="Marvel Studios" onLinkPress={() => {}} />
               <Movies movies={marvelMovies} />
               <CarouselHeader title="Best movies" onLinkPress={() => {}} />
-              <Movies movies={bestMovies} showMovieTitle={false} />
+              <Movies movies={bestMovies} floatingMovieTitle={false} />
             </>
           )}
         </View>

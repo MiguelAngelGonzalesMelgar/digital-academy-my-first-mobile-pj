@@ -10,10 +10,10 @@ export interface Movie {
 
 interface MoviesProps {
   movies: Movie[];
-  showMovieTitle?: boolean;
+  floatingMovieTitle?: boolean;
 }
 
-const Movies = ({movies, showMovieTitle = true}: MoviesProps) => {
+const Movies = ({movies, floatingMovieTitle = true}: MoviesProps) => {
   return (
     <View style={styles.container}>
       <FlatList
@@ -22,17 +22,22 @@ const Movies = ({movies, showMovieTitle = true}: MoviesProps) => {
         horizontal
         renderItem={({item}) => (
           <View style={styles.movieItemContainer}>
-            <Image
-              style={styles.image}
-              source={{uri: `${POSTER_BASE_URL}${item.poster_path}`}}
-              defaultSource={{
-                uri: 'https://placehold.co/150x200/cccccc/000000?text=No+Image',
-              }}
-              onError={error =>
-                console.log('Error cargando imagen:', error.nativeEvent.error)
-              }
-            />
-            {showMovieTitle && item.title && (
+            <View style={styles.imageWrapper}>
+              <Image
+                style={styles.image}
+                source={{uri: `${POSTER_BASE_URL}${item.poster_path}`}}
+                defaultSource={{
+                  uri: 'https://placehold.co/150x200/cccccc/000000?text=No+Image',
+                }}
+                onError={error =>
+                  console.log('Error cargando imagen:', error.nativeEvent.error)
+                }
+              />
+              {!floatingMovieTitle && item.title && (
+                <Text style={styles.floatingTitle}>{item.title} ⭐️</Text>
+              )}
+            </View>
+            {floatingMovieTitle && item.title && (
               <Text style={styles.movieTitle}>{item.title}</Text>
             )}
           </View>
@@ -52,6 +57,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 150,
   },
+  imageWrapper: {
+    position: 'relative',
+  },
   image: {
     width: 150,
     height: 200,
@@ -61,9 +69,23 @@ const styles = StyleSheet.create({
   movieTitle: {
     color: 'white',
     fontSize: 14,
-    fontWeight: 'semibold',
+    fontWeight: '600',
     textAlign: 'left',
     marginVertical: 10,
+  },
+  floatingTitle: {
+    position: 'absolute',
+    bottom: 8,
+    left: 10,
+    right: 10,
+    color: 'white',
+    fontSize: 14,
+    fontWeight: '600',
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    paddingVertical: 4,
+    paddingHorizontal: 6,
+    borderRadius: 4,
+    zIndex: 10,
   },
 });
 
