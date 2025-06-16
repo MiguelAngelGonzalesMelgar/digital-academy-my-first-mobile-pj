@@ -1,13 +1,6 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
-import {
-  ActivityIndicator,
-  Dimensions,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
 import {useSharedValue} from 'react-native-reanimated';
 import Carousel, {
   ICarouselInstance,
@@ -19,6 +12,7 @@ import {getTopRatedMovies} from '../utils/service/topRatedMovies';
 import FMButton from './FMButton';
 import {POSTER_BASE_URL} from '@env';
 import LinearGradient from 'react-native-linear-gradient';
+import {useMovieModal} from '../context/MovieModalContext';
 
 const {width} = Dimensions.get('window');
 const SLIDER_HEIGHT = width / (2.3 / 3); //2.5:3 ratio
@@ -27,6 +21,11 @@ const PAGINATION_HEIGHT = 30;
 const Slider = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const ref = React.useRef<ICarouselInstance>(null);
+  const progress = useSharedValue<number>(0);
+  const {dispatch} = useMovieModal();
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -52,14 +51,18 @@ const Slider = () => {
     fetchMovies();
   }, []);
 
-  const ref = React.useRef<ICarouselInstance>(null);
-  const progress = useSharedValue<number>(0);
-
   const onPressPagination = (index: number) => {
     ref.current?.scrollTo({
       count: index - progress.value,
       animated: true,
     });
+  };
+
+  const handleOpenDetails = () => {
+    const movie = movies[currentIndex];
+    if (movie) {
+      dispatch({type: 'OPEN_MODAL', payload: movie});
+    }
   };
 
   if (error) {
@@ -78,6 +81,7 @@ const Slider = () => {
         width={width}
         height={SLIDER_HEIGHT}
         data={movies}
+        onSnapToItem={setCurrentIndex}
         onProgressChange={progress}
         renderItem={({item}) => (
           <View style={styles.slideContainer}>
@@ -105,7 +109,7 @@ const Slider = () => {
           + Wishlist
         </FMButton>
         <FMButton
-          onPress={() => console.log('Go to Details')}
+          onPress={handleOpenDetails}
           backgroundColor="#F3C15D"
           style={styles.floatingButton}
           textStyle={{fontSize: 16, color: 'black', fontWeight: '400'}}>

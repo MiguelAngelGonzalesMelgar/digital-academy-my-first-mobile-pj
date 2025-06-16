@@ -10,11 +10,14 @@ import {getBestMovies, getMarvelMovies} from '../utils/service/TMDBService';
 import Movies, {Movie} from '../components/Movies';
 import Slider from '../components/Slider';
 import CarouselHeader from '../components/CarouselHeader';
+import MovieDetailModal from '../components/MovieDetailModal';
+import {useMovieModal} from '../context/MovieModalContext';
 
 const Home = () => {
   const [bestMovies, setBestMovies] = useState<Movie[]>([]);
   const [marvelMovies, setMarvelMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const {state, dispatch} = useMovieModal();
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -56,6 +59,11 @@ const Home = () => {
               <Movies movies={bestMovies} floatingMovieTitle={false} />
             </>
           )}
+          <MovieDetailModal
+            movie={state.movie!}
+            isVisible={state.isVisible}
+            onClose={() => dispatch({type: 'CLOSE_MODAL'})}
+          />
         </View>
       </ScrollView>
     </View>
