@@ -1,6 +1,7 @@
 import {FlatList, Image, StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-gesture-handler';
 import {POSTER_BASE_URL} from '@env';
+import {useState} from 'react';
 
 export interface Movie {
   id: string;
@@ -14,6 +15,7 @@ interface MoviesProps {
 }
 
 const Movies = ({movies, floatingMovieTitle = true}: MoviesProps) => {
+  const [isModalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.container}>
       <FlatList
