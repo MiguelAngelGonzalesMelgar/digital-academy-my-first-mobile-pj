@@ -10,7 +10,6 @@ import {getBestMovies, getMarvelMovies} from '../utils/service/TMDBService';
 import Movies, {Movie} from '../components/Movies';
 import Slider from '../components/Slider';
 import CarouselHeader from '../components/CarouselHeader';
-import MovieDetailModal from '../components/MovieDetailModal';
 
 const Home = () => {
   const [bestMovies, setBestMovies] = useState<Movie[]>([]);
