@@ -21,7 +21,7 @@ import {POSTER_BASE_URL} from '@env';
 import LinearGradient from 'react-native-linear-gradient';
 
 const {width} = Dimensions.get('window');
-const SLIDER_HEIGHT = width / (2.5 / 3); //2.5:3 ratio
+const SLIDER_HEIGHT = width / (2.3 / 3); //2.5:3 ratio
 const PAGINATION_HEIGHT = 30;
 
 const Slider = () => {
@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 16,
     color: '#666',
+    fontFamily: 'Gilroy-Bold',
   },
   slideContainer: {
     flex: 1,
@@ -189,6 +190,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: 'light',
+    fontFamily: 'Gilroy-Medium',
   },
   fixedButtonContainer: {
     position: 'absolute',
@@ -204,7 +206,7 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 10,
-    marginLeft: 8,
+    marginLeft: 10,
     width: 160,
     height: 50,
   },

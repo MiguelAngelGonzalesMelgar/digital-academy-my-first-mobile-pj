@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#ffffff',
+    fontFamily: 'Gilroy-Bold',
   },
   linkButton: {
     paddingVertical: 5,
@@ -42,6 +43,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     color: '#F3C15D',
+    fontFamily: 'Gilroy-bold',
   },
 });
 
