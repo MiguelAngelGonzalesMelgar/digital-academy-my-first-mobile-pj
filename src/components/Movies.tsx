@@ -50,10 +50,8 @@ const Movies = ({movies, floatingMovieTitle = true}: MoviesProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 5,
   },
   movieItemContainer: {
-    marginHorizontal: 5,
     alignItems: 'center',
     width: 150,
   },
@@ -61,31 +59,32 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   image: {
-    width: 150,
-    height: 200,
-    marginHorizontal: 10,
+    width: 130,
+    height: 160,
     borderRadius: 8,
   },
   movieTitle: {
     color: 'white',
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '600',
     textAlign: 'left',
     marginVertical: 10,
+    fontFamily: 'Gilroy-Medium',
   },
   floatingTitle: {
     position: 'absolute',
-    bottom: 8,
-    left: 10,
-    right: 10,
+    bottom: 0,
+    left: 5,
+    right: 5,
     color: 'white',
-    fontSize: 14,
+    fontSize: 10,
     fontWeight: '600',
     backgroundColor: 'rgba(0,0,0,0.6)',
     paddingVertical: 4,
     paddingHorizontal: 6,
     borderRadius: 4,
     zIndex: 10,
+    fontFamily: 'Gilroy-Medium',
   },
 });
 

@@ -40,18 +40,23 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{flexGrow: 1, paddingBottom: 40}}>
-        <Slider />
         <View style={styles.contentContainer}>
           {isLoading ? (
             <>
-              <ActivityIndicator size="large" color="#F3C15D" />
               <Text style={styles.statusText}>Loading movies...</Text>
+              <ActivityIndicator size="large" color="#F3C15D" />
             </>
           ) : (
             <>
+              <Slider />
               <CarouselHeader title="Marvel Studios" onLinkPress={() => {}} />
               <Movies movies={marvelMovies} />
               <CarouselHeader title="Best movies" onLinkPress={() => {}} />
+              <Movies movies={bestMovies} floatingMovieTitle={false} />
+              <CarouselHeader title="Best movies" onLinkPress={() => {}} />
+              <Movies movies={bestMovies} floatingMovieTitle={false} />
+              <CarouselHeader title="Best movies" onLinkPress={() => {}} />
+
               <Movies movies={bestMovies} floatingMovieTitle={false} />
             </>
           )}
@@ -79,7 +84,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   statusText: {
-    marginTop: 10,
+    marginTop: 400,
     fontSize: 16,
     color: '#666',
     alignSelf: 'center',
