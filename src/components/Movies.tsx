@@ -1,6 +1,15 @@
-import {FlatList, Image, StyleSheet, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Text} from 'react-native-gesture-handler';
 import {POSTER_BASE_URL} from '@env';
+import {useState} from 'react';
+import MovieDetailModal, {MovieDetail} from './MovieDetailModal';
+import {useMovieModal} from '../context/MovieModalContext';
 
 export interface Movie {
   id: string;
@@ -9,11 +18,24 @@ export interface Movie {
 }
 
 interface MoviesProps {
-  movies: Movie[];
+  movies: MovieDetail[];
   floatingMovieTitle?: boolean;
 }
 
 const Movies = ({movies, floatingMovieTitle = true}: MoviesProps) => {
+  const {dispatch} = useMovieModal();
+  // const [isModalVisible, setModalVisible] = useState<boolean>(false);
+  // const [selectedMovie, setSelectedMovie] = useState<MovieDetail | null>(null);
+
+  // const handleDetailModal = (movie: MovieDetail) => {
+  //   setSelectedMovie(movie);
+  //   setModalVisible(true);
+  // };
+  // const closeModal = () => {
+  //   setModalVisible(false);
+  //   setSelectedMovie(null);
+  // };
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -21,7 +43,9 @@ const Movies = ({movies, floatingMovieTitle = true}: MoviesProps) => {
         keyExtractor={item => item.id.toString()}
         horizontal
         renderItem={({item}) => (
-          <View style={styles.movieItemContainer}>
+          <TouchableOpacity
+            onPress={() => dispatch({type: 'OPEN_MODAL', payload: item})}
+            style={styles.movieItemContainer}>
             <View style={styles.imageWrapper}>
               <Image
                 style={styles.image}
@@ -40,9 +64,16 @@ const Movies = ({movies, floatingMovieTitle = true}: MoviesProps) => {
             {floatingMovieTitle && item.title && (
               <Text style={styles.movieTitle}>{item.title}</Text>
             )}
-          </View>
+          </TouchableOpacity>
         )}
       />
+      {/* {selectedMovie && (
+        <MovieDetailModal
+          movie={selectedMovie}
+          isVisible={isModalVisible}
+          onClose={closeModal}
+        />
+      )} */}
     </View>
   );
 };
