@@ -1,33 +1,22 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import Home from './src/screens/Home';
 import {MovieModalProvider} from './src/context/MovieModalContext';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Whishlist from './src/screens/Whishlist';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
+import MainNavigator from './src/navigation/MainNavigation';
 
+const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function App(): React.JSX.Element {
   return (
-    <View style={styles.mainContainer}>
-      {/* <MovieModalProvider>
-        <Home />
-      </MovieModalProvider> */}
+    <MovieModalProvider>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Whishlist" component={Whishlist} />
-        </Stack.Navigator>
+        <MainNavigator />
       </NavigationContainer>
-    </View>
+    </MovieModalProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-  },
-});
 
 export default App;
