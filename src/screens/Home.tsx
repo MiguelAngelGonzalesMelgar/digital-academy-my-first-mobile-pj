@@ -43,28 +43,26 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={{flexGrow: 1, paddingBottom: 40}}>
-        <View style={styles.contentContainer}>
-          {isLoading ? (
-            <>
-              <Text style={styles.statusText}>Loading movies...</Text>
-              <ActivityIndicator size="large" color="#F3C15D" />
-            </>
-          ) : (
-            <>
-              <Slider />
-              <CarouselHeader title="Marvel Studios" onLinkPress={() => {}} />
-              <Movies movies={marvelMovies} />
-              <CarouselHeader title="Best movies" onLinkPress={() => {}} />
-              <Movies movies={bestMovies} floatingMovieTitle={false} />
-            </>
-          )}
-          <MovieDetailModal
-            movie={state.movie!}
-            isVisible={state.isVisible}
-            onClose={() => dispatch({type: 'CLOSE_MODAL'})}
-          />
-        </View>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        {isLoading ? (
+          <View style={styles.loadingContainer}>
+            <Text style={styles.statusText}>Loading movies...</Text>
+            <ActivityIndicator size="large" color="#F3C15D" />
+          </View>
+        ) : (
+          <>
+            <Slider />
+            <CarouselHeader title="Marvel Studios" onLinkPress={() => {}} />
+            <Movies movies={marvelMovies} />
+            <CarouselHeader title="Best movies" onLinkPress={() => {}} />
+            <Movies movies={bestMovies} floatingMovieTitle={false} />
+          </>
+        )}
+        <MovieDetailModal
+          movie={state.movie!}
+          isVisible={state.isVisible}
+          onClose={() => dispatch({type: 'CLOSE_MODAL'})}
+        />
       </ScrollView>
     </View>
   );
@@ -72,23 +70,20 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: '#000000',
-    flex: 1,
   },
-  heading: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#fff',
-    marginBottom: 10,
-    marginLeft: 10,
+  scrollContent: {
+    flexGrow: 1,
+    paddingBottom: 90,
   },
-  contentContainer: {
+  loadingContainer: {
     flex: 1,
-    paddingHorizontal: 10,
-    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 50,
   },
   statusText: {
-    marginTop: 400,
     fontSize: 16,
     color: '#666',
     alignSelf: 'center',
