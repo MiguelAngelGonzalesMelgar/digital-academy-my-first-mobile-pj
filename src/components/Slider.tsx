@@ -77,6 +77,8 @@ const Slider = () => {
     <View
       style={[styles.container, {height: SLIDER_HEIGHT + PAGINATION_HEIGHT}]}>
       <Carousel
+        autoPlay={true}
+        autoPlayInterval={3000}
         ref={ref}
         width={width}
         height={SLIDER_HEIGHT}
