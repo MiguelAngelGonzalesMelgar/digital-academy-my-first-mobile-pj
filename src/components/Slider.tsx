@@ -1,55 +1,38 @@
-import React from 'react';
-import {useEffect, useState} from 'react';
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {useState} from 'react';
+import {
+  ActivityIndicator,
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {useSharedValue} from 'react-native-reanimated';
 import Carousel, {
   ICarouselInstance,
   Pagination,
 } from 'react-native-reanimated-carousel';
-import {getRecentMovies} from '../utils/service/TMDBService';
-import {Movie} from './Movies';
-import {getTopRatedMovies} from '../utils/service/topRatedMovies';
 import FMButton from './FMButton';
 import {POSTER_BASE_URL} from '@env';
 import LinearGradient from 'react-native-linear-gradient';
 import {useMovieModal} from '../context/MovieModalContext';
+import useTMDB from '../hooks/useTMDB';
+import {MovieDetail} from './MovieDetailModal';
+import randomRecentMovies from '../utils/service/randomRecentMovies';
 
 const {width} = Dimensions.get('window');
-const SLIDER_HEIGHT = width / (2.3 / 3); //2.5:3 ratio
+const SLIDER_HEIGHT = width / (2.3 / 3); //2.3:3 ratio
 const PAGINATION_HEIGHT = 30;
 
 const Slider = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const {movies, loading, error} = useTMDB('/movie/now_playing');
+  const [topFiveMovies, setTopFiveMovies] = useState<MovieDetail[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const ref = React.useRef<ICarouselInstance>(null);
   const progress = useSharedValue<number>(0);
   const {dispatch} = useMovieModal();
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        setError(null);
-
-        const results = await getRecentMovies();
-        if (Array.isArray(results)) {
-          const topRatedMovies = getTopRatedMovies(results);
-          setMovies(topRatedMovies);
-        }
-      } catch (error: any) {
-        console.error('Error fetching popular movies:', error);
-        setError(
-          `Failed to load movies: ${
-            error.message || 'An unknown error occurred.'
-          }`,
-        );
-        setMovies([]);
-      } finally {
-      }
-    };
-    fetchMovies();
-  }, []);
 
   const onPressPagination = (index: number) => {
     ref.current?.scrollTo({
@@ -65,10 +48,26 @@ const Slider = () => {
     }
   };
 
+  useEffect(() => {
+    if (movies.length > 0) {
+      const randomMovies = randomRecentMovies(movies, 5);
+      setTopFiveMovies(randomMovies);
+    }
+  }, [movies]);
+
+  if (loading) {
+    return (
+      <View style={styles.centerContainer}>
+        <Text style={styles.statusText}>Loading movies...</Text>
+        <ActivityIndicator size="large" color="#F3C15D" />
+      </View>
+    );
+  }
+
   if (error) {
     return (
       <View style={styles.centerContainer}>
-        <Text>Error: {error}</Text>
+        <Text>Error: {error.message}</Text>
       </View>
     );
   }
@@ -82,7 +81,7 @@ const Slider = () => {
         ref={ref}
         width={width}
         height={SLIDER_HEIGHT}
-        data={movies}
+        data={topFiveMovies}
         onSnapToItem={setCurrentIndex}
         onProgressChange={progress}
         renderItem={({item}) => (
@@ -120,7 +119,7 @@ const Slider = () => {
       </View>
       <Pagination.Basic
         progress={progress}
-        data={movies}
+        data={topFiveMovies}
         dotStyle={styles.paginationDot}
         activeDotStyle={{
           backgroundColor: '#F3C15D',
