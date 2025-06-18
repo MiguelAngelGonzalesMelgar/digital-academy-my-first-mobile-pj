@@ -19,7 +19,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useMovieModal} from '../context/MovieModalContext';
 import useTMDB from '../hooks/useTMDB';
 import {MovieDetail} from './MovieDetailModal';
-import randomRecentMovies from '../utils/service/randomRecentMovies';
+import randomRecentMovies from '../utils/randomRecentMovies';
 
 const {width} = Dimensions.get('window');
 const SLIDER_HEIGHT = width / (2.3 / 3); //2.3:3 ratio

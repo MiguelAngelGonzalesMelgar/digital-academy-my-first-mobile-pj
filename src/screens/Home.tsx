@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   ActivityIndicator,
   ScrollView,
@@ -6,40 +6,24 @@ import {
   Text,
   View,
 } from 'react-native';
-import {getBestMovies, getMarvelMovies} from '../utils/service/TMDBService';
-import Movies, {Movie} from '../components/Movies';
+import Movies from '../components/Movies';
 import Slider from '../components/Slider';
 import CarouselHeader from '../components/CarouselHeader';
 import MovieDetailModal from '../components/MovieDetailModal';
 import {useMovieModal} from '../context/MovieModalContext';
+import useTMDB from '../hooks/useTMDB';
 
 const Home = () => {
-  const [bestMovies, setBestMovies] = useState<Movie[]>([]);
-  const [marvelMovies, setMarvelMovies] = useState<Movie[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const {state, dispatch} = useMovieModal();
 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      setIsLoading(true);
-      try {
-        const [bestMoviesData, marvelMoviesData] = await Promise.all([
-          getBestMovies(),
-          getMarvelMovies(),
-          console.log(bestMovies),
-        ]);
+  const {movies: bestMovies, loading: bestLoading} =
+    useTMDB('/movie/top_rated');
+  const {movies: marvelMovies, loading: marvelLoading} = useTMDB(
+    '/discover/movie',
+    {with_companies: 420},
+  );
 
-        setBestMovies(bestMoviesData || []);
-        setMarvelMovies(marvelMoviesData || []);
-      } catch (error) {
-        console.error('Error fetching movies:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchMovies();
-  }, []);
+  const isLoading = bestLoading || marvelLoading;
 
   return (
     <View style={styles.container}>
