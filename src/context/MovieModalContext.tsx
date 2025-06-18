@@ -1,5 +1,5 @@
 import React, {createContext, ReactNode, useContext, useReducer} from 'react';
-import {MovieDetail} from '../components/MovieDetailModal';
+import {MovieDetail} from '../interfaces/tmdb';
 
 type ModalState = {
   isVisible: boolean;

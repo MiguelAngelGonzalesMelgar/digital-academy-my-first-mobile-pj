@@ -16,6 +16,8 @@ import useTMDB from '../hooks/useTMDB';
 const Home = () => {
   const {state, dispatch} = useMovieModal();
 
+  const {movies: recentMovies, loading: recentLoading} =
+    useTMDB('/movie/now_playing');
   const {movies: bestMovies, loading: bestLoading} =
     useTMDB('/movie/top_rated');
   const {movies: marvelMovies, loading: marvelLoading} = useTMDB(
@@ -23,7 +25,7 @@ const Home = () => {
     {with_companies: 420},
   );
 
-  const isLoading = bestLoading || marvelLoading;
+  const isLoading = recentLoading || bestLoading || marvelLoading;
 
   return (
     <View style={styles.container}>
@@ -35,7 +37,7 @@ const Home = () => {
           </View>
         ) : (
           <>
-            <Slider />
+            <Slider movies={recentMovies} />
             <CarouselHeader title="Marvel Studios" onLinkPress={() => {}} />
             <Movies movies={marvelMovies} />
             <CarouselHeader title="Best movies" onLinkPress={() => {}} />

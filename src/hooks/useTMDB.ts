@@ -1,16 +1,12 @@
 import {TMDB_ACCESS_TOKEN, TMDB_BASE_URL} from '@env';
 import axios, {AxiosError, AxiosResponse} from 'axios';
 import {useReducer, useEffect} from 'react';
-import {MovieDetail} from '../components/MovieDetailModal';
+import {MovieDetail, TMDBResponse} from '../interfaces/tmdb';
 
 interface State {
   movies: MovieDetail[];
   loading: boolean;
   error: Error | null;
-}
-
-interface TMDBResponse {
-  results: MovieDetail[];
 }
 
 type ApiOptions = {[key: string]: string | number | boolean};
