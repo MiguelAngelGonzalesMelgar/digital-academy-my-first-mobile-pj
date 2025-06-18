@@ -1,16 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import Modal from 'react-native-modal';
-import {Movie} from './Movies';
+import {MovieDetail} from '../interfaces/tmdb';
 import {POSTER_BASE_URL} from '@env';
 import FMButton from './FMButton';
-
-export interface MovieDetail extends Movie {
-  overview?: string;
-  releaseDate?: string;
-  backdrop_path?: string;
-  vote_average?: number;
-}
 
 interface ModalProps {
   movie: MovieDetail;

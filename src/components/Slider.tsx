@@ -1,13 +1,6 @@
 import React, {useEffect} from 'react';
 import {useState} from 'react';
-import {
-  ActivityIndicator,
-  Dimensions,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
 import {useSharedValue} from 'react-native-reanimated';
 import Carousel, {
   ICarouselInstance,
@@ -17,16 +10,17 @@ import FMButton from './FMButton';
 import {POSTER_BASE_URL} from '@env';
 import LinearGradient from 'react-native-linear-gradient';
 import {useMovieModal} from '../context/MovieModalContext';
-import useTMDB from '../hooks/useTMDB';
-import {MovieDetail} from './MovieDetailModal';
+import {MovieDetail} from '../interfaces/tmdb';
 import randomRecentMovies from '../utils/randomRecentMovies';
 
 const {width} = Dimensions.get('window');
 const SLIDER_HEIGHT = width / (2.3 / 3); //2.3:3 ratio
 const PAGINATION_HEIGHT = 30;
 
-const Slider = () => {
-  const {movies, loading, error} = useTMDB('/movie/now_playing');
+interface SliderProps {
+  movies: MovieDetail[];
+}
+const Slider = ({movies}: SliderProps) => {
   const [topFiveMovies, setTopFiveMovies] = useState<MovieDetail[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -54,23 +48,6 @@ const Slider = () => {
       setTopFiveMovies(randomMovies);
     }
   }, [movies]);
-
-  if (loading) {
-    return (
-      <View style={styles.centerContainer}>
-        <Text style={styles.statusText}>Loading movies...</Text>
-        <ActivityIndicator size="large" color="#F3C15D" />
-      </View>
-    );
-  }
-
-  if (error) {
-    return (
-      <View style={styles.centerContainer}>
-        <Text>Error: {error.message}</Text>
-      </View>
-    );
-  }
 
   return (
     <View
@@ -135,17 +112,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#000000',
   },
-  centerContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  statusText: {
-    marginTop: 10,
-    fontSize: 16,
-    color: '#666',
-    fontFamily: 'Gilroy-Bold',
-  },
   slideContainer: {
     flex: 1,
     backgroundColor: 'black',
@@ -206,7 +172,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     opacity: 0.9,
   },
-
   floatingButton: {
     paddingVertical: 6,
     paddingHorizontal: 12,

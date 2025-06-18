@@ -8,14 +8,8 @@ import {
 import {Text} from 'react-native-gesture-handler';
 import {POSTER_BASE_URL} from '@env';
 
-import {MovieDetail} from './MovieDetailModal';
+import {MovieDetail} from '../interfaces/tmdb';
 import {useMovieModal} from '../context/MovieModalContext';
-
-export interface Movie {
-  id: string;
-  poster_path: string;
-  title?: string;
-}
 
 interface MoviesProps {
   movies: MovieDetail[];
