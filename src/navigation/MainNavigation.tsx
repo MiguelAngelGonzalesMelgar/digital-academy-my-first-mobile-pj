@@ -8,28 +8,24 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
 
+const TAB_ICON_MAP: {[key: string]: {focused: string; unfocused: string}} = {
+  Home: {focused: 'home', unfocused: 'home-outline'},
+  Search: {focused: 'search', unfocused: 'search-outline'},
+  Whishlist: {focused: 'heart', unfocused: 'heart-outline'},
+  Profile: {focused: 'person', unfocused: 'person-outline'},
+};
+
 const MainNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
         headerShown: false,
         tabBarIcon: ({focused, color, size}) => {
-          let iconName: string = '';
-
-          switch (route.name) {
-            case 'Home':
-              iconName = focused ? 'home' : 'home-outline';
-              break;
-            case 'Search':
-              iconName = focused ? 'search' : 'search-outline';
-              break;
-            case 'Whishlist':
-              iconName = focused ? 'heart' : 'heart-outline';
-              break;
-            case 'Profile':
-              iconName = focused ? 'person' : 'person-outline';
-              break;
+          const iconConfig = TAB_ICON_MAP[route.name];
+          if (!iconConfig) {
+            return <Ionicons name="help-circle" size={size} color={color} />;
           }
+          const iconName = focused ? iconConfig.focused : iconConfig.unfocused;
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },

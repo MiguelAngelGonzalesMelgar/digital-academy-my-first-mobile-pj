@@ -7,8 +7,8 @@ import {
 } from 'react-native';
 import {Text} from 'react-native-gesture-handler';
 import {POSTER_BASE_URL} from '@env';
-import {useState} from 'react';
-import MovieDetailModal, {MovieDetail} from './MovieDetailModal';
+
+import {MovieDetail} from './MovieDetailModal';
 import {useMovieModal} from '../context/MovieModalContext';
 
 export interface Movie {
@@ -24,17 +24,6 @@ interface MoviesProps {
 
 const Movies = ({movies, floatingMovieTitle = true}: MoviesProps) => {
   const {dispatch} = useMovieModal();
-  // const [isModalVisible, setModalVisible] = useState<boolean>(false);
-  // const [selectedMovie, setSelectedMovie] = useState<MovieDetail | null>(null);
-
-  // const handleDetailModal = (movie: MovieDetail) => {
-  //   setSelectedMovie(movie);
-  //   setModalVisible(true);
-  // };
-  // const closeModal = () => {
-  //   setModalVisible(false);
-  //   setSelectedMovie(null);
-  // };
 
   return (
     <View style={styles.container}>
@@ -67,13 +56,6 @@ const Movies = ({movies, floatingMovieTitle = true}: MoviesProps) => {
           </TouchableOpacity>
         )}
       />
-      {/* {selectedMovie && (
-        <MovieDetailModal
-          movie={selectedMovie}
-          isVisible={isModalVisible}
-          onClose={closeModal}
-        />
-      )} */}
     </View>
   );
 };
