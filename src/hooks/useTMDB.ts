@@ -13,6 +13,8 @@ interface TMDBResponse {
   results: MovieDetail[];
 }
 
+type ApiOptions = {[key: string]: string | number | boolean};
+
 type Action =
   | {type: 'LOADING'}
   | {type: 'SUCCESS'; payload: MovieDetail[]}
@@ -31,7 +33,13 @@ const dataFetchReducer = (state: State, action: Action) => {
   }
 };
 
-const useTMDB = (path: string): State => {
+/**
+ * Custom hook for fetching movies from TMDB
+ * @param path TMDB endpoint path (e.g. /movie/top_rated)
+ * @param customParams Optional query parameters (e.g. { with_companies: 420 })
+ */
+
+const useTMDB = (path: string, customParams?: ApiOptions): State => {
   const initialState = {
     movies: [],
     loading: false,
@@ -55,6 +63,7 @@ const useTMDB = (path: string): State => {
             params: {
               language: 'en-US',
               page: 1,
+              ...customParams,
             },
             signal: signal,
           },
@@ -74,7 +83,7 @@ const useTMDB = (path: string): State => {
     return () => {
       controller.abort();
     };
-  }, [path]);
+  }, [path, JSON.stringify(customParams)]);
   return {...state};
 };
 
