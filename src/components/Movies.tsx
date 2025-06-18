@@ -43,7 +43,7 @@ const Movies = ({movies, floatingMovieTitle = true}: MoviesProps) => {
                   uri: 'https://placehold.co/150x200/cccccc/000000?text=No+Image',
                 }}
                 onError={error =>
-                  console.log('Error cargando imagen:', error.nativeEvent.error)
+                  console.log('Error loading image:', error.nativeEvent.error)
                 }
               />
               {!floatingMovieTitle && item.title && (
