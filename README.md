@@ -1,97 +1,163 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# FirstMobile - Movie App with React Native
 
-# Getting Started
+This repository contains "FirstMobile," a movie application developed using React Native. This project was created as part of the Mobile Development Training Module at Digital Academy, serving as my very first mobile application built with React Native.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Table of Contents
 
-## Step 1: Start Metro
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Step 1: Install Dependencies](#step-1-install-dependencies)
+  - [Step 2: Start Metro](#step-2-start-metro)
+  - [Step 3: Build and Run Your App](#step-3-build-and-run-your-app)
+- [Available Scripts](#available-scripts)
+- [Dependencies](#dependencies)
+- [Troubleshooting](#troubleshooting)
+  - [Android - Cleaning Gradle Cache](#android---cleaning-gradle-cache)
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+---
+
+## Getting Started
+
+> **Note**: Before you begin, ensure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide. This guide will walk you through installing Node, Watchman, React Native CLI, JDK, Android Studio, Xcode, and CocoaPods.
+
+### Prerequisites
+
+- Node.js (>=22)
+- Yarn or npm
+- React Native development environment configured (Android Studio, Xcode.)
+- Repository cloned.
+
+```sh
+  git clone git@github.com:MiguelAngelGonzalesMelgar/digital-academy-my-first-mobile-pj.git
+```
+
+### Step 1: Install Dependencies
+
+Navigate to the root of the project and install the necessary JavaScript dependencies:
+
+```sh
+  cd digital-academy-my-first-mobile-pj.git
+
+  # Using npm
+  npm install
+
+  # OR using Yarn
+  yarninstall
+```
+
+### Step 2: Start Metro
+
+First, you will need to run Metro, the JavaScript build tool for React Native. Metro bundles all your JavaScript code into a single file and serves it to your app.
 
 To start the Metro dev server, run the following command from the root of your React Native project:
 
 ```sh
-# Using npm
-npm start
+  # Using npm
+  npm start
 
-# OR using Yarn
-yarn start
+  # OR using Yarn
+  yarn start
 ```
 
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+### Step 3: Build and Run Your App
 
 ### Android
 
 ```sh
-# Using npm
-npm run android
+  # Using npm
+  npm run android
 
-# OR using Yarn
-yarn android
+  # OR using Yarn
+  yarn android
 ```
 
-### iOS
+### IOS
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+For iOS, remember to install CocoaPods dependencies. This only needs to be run on the first clone or after updating native dependencies.
 
 The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
 
 ```sh
-bundle install
+  cd ios
+  bundle install
 ```
 
-Then, and every time you update your native dependencies, run:
+Then, and every time you update your native dependencies (e.g., after npm install or yarn install if new native modules are added), run:
 
 ```sh
-bundle exec pod install
+  bundle exec pod install
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+For more information on CocoaPods, please visit the [CocoaPods Getting Started guide.](https://guides.cocoapods.org/using/getting-started.html)
+
+Now, you can run your iOS app:
 
 ```sh
-# Using npm
-npm run ios
+  # Using npm
+  npm run ios
 
-# OR using Yarn
-yarn ios
+  # OR using Yarn
+  yarn ios
 ```
 
 If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+You can also build your app directly from Android Studio or Xcode if you prefer.
 
-## Step 3: Modify your app
+### Available Scripts
 
-Now that you have successfully run the app, let's make changes!
+In the project directory, you can run the following scripts:
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+- `npm start` or `yarn start`: Starts the Metro development server.
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+- `` npm run android` or  ``yarn android```: Runs the app on a connected Android device or emulator.
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+\*`npm run ios` or `yarn ios`: Runs the app on an iOS simulator or connected iOS device.
 
-## Congratulations! :tada:
+- `npm run reset` or `yarn reset`: Starts the Metro server and resets its cache. Useful for resolving caching issues.
 
-You've successfully run and modified your React Native App. :partying_face:
+### Dependencies
 
-### Now what?
+This project utilizes a variety of libraries to enhance its functionality and user interface.
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+**Core Dependencies**
 
-# Troubleshooting
+\*`react`: The core JavaScript library for building user interfaces.
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+\*`react-native`: The framework for building native mobile apps using React.
 
-# Learn More
+### Troubleshooting
 
-To learn more about React Native, take a look at the following resources:
+**Android - Cleaning Gradle Cache**
+Occasionally, after adding new native dependencies, updating libraries, or encountering unexpected build errors on Android, you might need to clean the Gradle cache.
+This can resolve issues related to outdated or corrupted build artifacts.
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+To clean your Android project's Gradle cache, navigate to the android directory within your project and run the following command:
+
+```sh
+  cd android
+  ./gradlew clean
+  cd ..
+```
+
+After cleaning, try building and running your Android app again:
+
+```sh
+  # Using npm
+  npm run android
+
+  # OR using Yarn
+  yarn android
+```
+
+If issues persist, consider rebuilding the project from Android Studio.
+
+_It is recommended to delete the app from your device or emulator everytime you clean the cache or clean gradle._
+
+This app is getting all Movies info thanks to TMDB API.
+
+For more detail visit [TMDB-docs](https://developer.themoviedb.org/docs/getting-started).
+
+**Remember to add your .env variables**, check the .env.example
+
+Please feel free to contribute to this project.
