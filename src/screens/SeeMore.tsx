@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {
   NavigationProp,
   RouteProp,
@@ -7,12 +7,13 @@ import {
 } from '@react-navigation/native';
 import {RootStackParamList} from '../navigation/navigationTypes';
 import FMButton from '../components/FMButton';
+import Movies from '../components/Movies';
 
 type SeeMoreType = RouteProp<RootStackParamList, 'SeeMore'>;
 
 const SeeMore = () => {
   const route = useRoute<SeeMoreType>();
-  const {title} = route.params;
+  const {payload} = route.params;
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const handleNavigation = () => {
@@ -21,11 +22,12 @@ const SeeMore = () => {
 
   return (
     <View style={styles.container}>
+      <Movies movies={payload} isHorizontal={false} />
       <FMButton
         onPress={handleNavigation}
         style={styles.navButton}
         textColor={'#000000'}>
-        {title}
+        Wishlist
       </FMButton>
     </View>
   );
@@ -38,6 +40,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#000000',
   },
+
   navButton: {
     backgroundColor: '#F3C15D',
     fontFamily: 'Gilroy-bold',
