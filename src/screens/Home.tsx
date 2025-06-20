@@ -27,10 +27,23 @@ const Home = () => {
     '/discover/movie',
     {with_companies: 420},
   );
+  const {movies: horrorMovies, loading: horrorLoading} = useTMDB(
+    '/discover/movie',
+    {with_genres: 27},
+  );
+  const {movies: animationMovies, loading: animationLoading} = useTMDB(
+    '/discover/movie',
+    {with_genres: 16},
+  );
 
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
-  const isLoading = recentLoading || bestLoading || marvelLoading;
+  const isLoading =
+    recentLoading ||
+    bestLoading ||
+    marvelLoading ||
+    horrorLoading ||
+    animationLoading;
 
   const handleSeeMore = (payload: MovieDetail[]) => {
     navigation.navigate('SeeMore', {
@@ -52,13 +65,30 @@ const Home = () => {
             <Movies
               movies={marvelMovies}
               title="Marvel Studios"
+              touchableText="See More"
               onPress={() => handleSeeMore(marvelMovies)}
             />
             <Movies
               movies={bestMovies}
               title="Best Movies"
+              touchableText="See More"
               floatingMovieTitle={false}
               onPress={() => handleSeeMore(bestMovies)}
+            />
+            <View style={{marginTop: 21}}>
+              <Movies
+                movies={horrorMovies}
+                title="Horror Movies"
+                touchableText="See More"
+                onPress={() => handleSeeMore(horrorMovies)}
+              />
+            </View>
+            <Movies
+              movies={animationMovies}
+              title="Animation Movies"
+              touchableText="See More"
+              floatingMovieTitle={false}
+              onPress={() => handleSeeMore(animationMovies)}
             />
           </>
         )}

@@ -16,6 +16,7 @@ interface MoviesProps {
   movies: MovieDetail[];
   floatingMovieTitle?: boolean;
   title?: string;
+  touchableText?: string;
   onPress?: () => void;
   isHorizontal?: boolean;
 }
@@ -24,6 +25,7 @@ const Movies = ({
   movies,
   floatingMovieTitle = true,
   title,
+  touchableText,
   onPress,
   isHorizontal = true,
 }: MoviesProps) => {
@@ -31,7 +33,11 @@ const Movies = ({
 
   return (
     <View style={styles.container}>
-      <CarouselHeader title={title} onLinkPress={onPress} />
+      <CarouselHeader
+        title={title}
+        touchableText={touchableText}
+        onLinkPress={onPress}
+      />
       <FlatList
         data={movies}
         keyExtractor={item => item.id.toString()}
