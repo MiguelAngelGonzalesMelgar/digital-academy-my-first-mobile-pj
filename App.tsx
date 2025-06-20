@@ -8,7 +8,7 @@ import Wishlist from './src/screens/Wishlist';
 
 const Stack = createNativeStackNavigator();
 
-const TabNavigator = () => {
+const TabNavigatorComponent = () => {
   return <MainNavigator />;
 };
 
@@ -18,12 +18,20 @@ function App(): React.JSX.Element {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="Home"
-            component={TabNavigator}
+            name="MainTabs"
+            component={TabNavigatorComponent}
             options={{headerShown: false}}
           />
-          <Stack.Screen name="SeeMore" component={SeeMore} />
-          <Stack.Screen name="Wishlist" component={Wishlist} />
+          <Stack.Screen
+            name="SeeMore"
+            component={SeeMore}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Wishlist"
+            component={Wishlist}
+            options={{headerShown: false}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </MovieModalProvider>
