@@ -21,9 +21,11 @@ const SeeMore = () => {
 
   return (
     <View style={styles.container}>
-      <Text>{title}</Text>
-      <FMButton onPress={handleNavigation} style={styles.navButton}>
-        Wishlist
+      <FMButton
+        onPress={handleNavigation}
+        style={styles.navButton}
+        textColor={'#000000'}>
+        {title}
       </FMButton>
     </View>
   );

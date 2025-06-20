@@ -18,7 +18,7 @@ function App(): React.JSX.Element {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="MainTabs"
+            name="HomeScreen"
             component={TabNavigatorComponent}
             options={{headerShown: false}}
           />

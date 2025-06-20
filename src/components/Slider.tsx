@@ -30,16 +30,9 @@ const Slider = ({movies}: SliderProps) => {
 
   const onPressPagination = (index: number) => {
     ref.current?.scrollTo({
-      count: index - progress.value,
+      count: index - currentIndex,
       animated: true,
     });
-  };
-
-  const handleOpenDetails = () => {
-    const movie = movies[currentIndex];
-    if (movie) {
-      dispatch({type: 'OPEN_MODAL', payload: movie});
-    }
   };
 
   useEffect(() => {
@@ -48,6 +41,13 @@ const Slider = ({movies}: SliderProps) => {
       setTopFiveMovies(randomMovies);
     }
   }, [movies]);
+
+  const handleOpenDetails = () => {
+    const movie = topFiveMovies[currentIndex];
+    if (movie) {
+      dispatch({type: 'OPEN_MODAL', payload: movie});
+    }
+  };
 
   return (
     <View
