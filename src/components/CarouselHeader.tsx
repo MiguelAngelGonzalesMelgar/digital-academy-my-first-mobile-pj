@@ -3,10 +3,15 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 interface CarouselHeaderProps {
   title?: string;
+  touchableText?: string;
   onLinkPress?: () => void;
 }
 
-const CarouselHeader = ({title, onLinkPress}: CarouselHeaderProps) => {
+const CarouselHeader = ({
+  title,
+  touchableText,
+  onLinkPress,
+}: CarouselHeaderProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>{title}</Text>
@@ -15,7 +20,7 @@ const CarouselHeader = ({title, onLinkPress}: CarouselHeaderProps) => {
         style={styles.linkButton}
         accessibilityRole="link"
         accessibilityLabel={`See more`}>
-        <Text style={styles.linkText}>See More</Text>
+        <Text style={styles.linkText}>{touchableText}</Text>
       </TouchableOpacity>
     </View>
   );
