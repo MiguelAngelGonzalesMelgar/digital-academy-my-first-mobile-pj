@@ -2,8 +2,8 @@ import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 interface CarouselHeaderProps {
-  title: string;
-  onLinkPress: () => void;
+  title?: string;
+  onLinkPress?: () => void;
 }
 
 const CarouselHeader = ({title, onLinkPress}: CarouselHeaderProps) => {
