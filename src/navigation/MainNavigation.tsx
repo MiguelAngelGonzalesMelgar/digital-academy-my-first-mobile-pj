@@ -2,7 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
 import Profile from '../screens/Profile';
-import Whishlist from '../screens/Whishlist';
+import Whishlist from '../screens/Wishlist';
 import Search from '../screens/Search';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 

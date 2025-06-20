@@ -12,6 +12,8 @@ import CarouselHeader from '../components/CarouselHeader';
 import MovieDetailModal from '../components/MovieDetailModal';
 import {useMovieModal} from '../context/MovieModalContext';
 import useTMDB from '../hooks/useTMDB';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../navigation/navigationTypes';
 
 const Home = () => {
   const {state, dispatch} = useMovieModal();
@@ -25,7 +27,15 @@ const Home = () => {
     {with_companies: 420},
   );
 
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
   const isLoading = recentLoading || bestLoading || marvelLoading;
+
+  const handleSeeMore = () => {
+    navigation.navigate('SeeMore', {
+      title: 'Wishlist',
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -38,9 +48,12 @@ const Home = () => {
         ) : (
           <>
             <Slider movies={recentMovies} />
-            <CarouselHeader title="Marvel Studios" onLinkPress={() => {}} />
+            <CarouselHeader
+              title="Marvel Studios"
+              onLinkPress={handleSeeMore}
+            />
             <Movies movies={marvelMovies} />
-            <CarouselHeader title="Best movies" onLinkPress={() => {}} />
+            <CarouselHeader title="Best movies" onLinkPress={handleSeeMore} />
             <Movies movies={bestMovies} floatingMovieTitle={false} />
           </>
         )}
