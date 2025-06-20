@@ -14,6 +14,7 @@ import {useMovieModal} from '../context/MovieModalContext';
 import useTMDB from '../hooks/useTMDB';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../navigation/navigationTypes';
+import {MovieDetail} from '../interfaces/tmdb';
 
 const Home = () => {
   const {state, dispatch} = useMovieModal();
@@ -31,9 +32,9 @@ const Home = () => {
 
   const isLoading = recentLoading || bestLoading || marvelLoading;
 
-  const handleSeeMore = () => {
+  const handleSeeMore = (payload: MovieDetail[]) => {
     navigation.navigate('SeeMore', {
-      title: 'Wishlist',
+      payload,
     });
   };
 
@@ -48,13 +49,17 @@ const Home = () => {
         ) : (
           <>
             <Slider movies={recentMovies} />
-            <CarouselHeader
+            <Movies
+              movies={marvelMovies}
               title="Marvel Studios"
-              onLinkPress={handleSeeMore}
+              onPress={() => handleSeeMore(marvelMovies)}
             />
-            <Movies movies={marvelMovies} />
-            <CarouselHeader title="Best movies" onLinkPress={handleSeeMore} />
-            <Movies movies={bestMovies} floatingMovieTitle={false} />
+            <Movies
+              movies={bestMovies}
+              title="Best Movies"
+              floatingMovieTitle={false}
+              onPress={() => handleSeeMore(bestMovies)}
+            />
           </>
         )}
         <MovieDetailModal

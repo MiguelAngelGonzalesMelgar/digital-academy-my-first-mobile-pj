@@ -1,5 +1,7 @@
+import {MovieDetail} from '../interfaces/tmdb';
+
 export type RootStackParamList = {
   Home: undefined;
-  SeeMore: {title: string};
+  SeeMore: {payload: MovieDetail[]};
   Wishlist: undefined;
 };

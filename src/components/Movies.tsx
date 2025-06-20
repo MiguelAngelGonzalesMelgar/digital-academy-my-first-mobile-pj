@@ -10,21 +10,34 @@ import {POSTER_BASE_URL} from '@env';
 
 import {MovieDetail} from '../interfaces/tmdb';
 import {useMovieModal} from '../context/MovieModalContext';
+import CarouselHeader from './CarouselHeader';
 
 interface MoviesProps {
   movies: MovieDetail[];
   floatingMovieTitle?: boolean;
+  title?: string;
+  onPress?: () => void;
+  isHorizontal?: boolean;
 }
 
-const Movies = ({movies, floatingMovieTitle = true}: MoviesProps) => {
+const Movies = ({
+  movies,
+  floatingMovieTitle = true,
+  title,
+  onPress,
+  isHorizontal = true,
+}: MoviesProps) => {
   const {dispatch} = useMovieModal();
 
   return (
     <View style={styles.container}>
+      <CarouselHeader title={title} onLinkPress={onPress} />
       <FlatList
         data={movies}
         keyExtractor={item => item.id.toString()}
-        horizontal
+        horizontal={isHorizontal}
+        numColumns={isHorizontal ? 1 : 2}
+        showsHorizontalScrollIndicator={false}
         renderItem={({item}) => (
           <TouchableOpacity
             onPress={() => dispatch({type: 'OPEN_MODAL', payload: item})}
@@ -49,6 +62,7 @@ const Movies = ({movies, floatingMovieTitle = true}: MoviesProps) => {
             )}
           </TouchableOpacity>
         )}
+        columnWrapperStyle={!isHorizontal ? styles.columnWrapper : undefined}
       />
     </View>
   );
@@ -60,7 +74,13 @@ const styles = StyleSheet.create({
   },
   movieItemContainer: {
     alignItems: 'center',
-    width: 150,
+    width: 160,
+  },
+  columnWrapper: {
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    marginBottom: 16,
+    gap: 12,
   },
   imageWrapper: {
     position: 'relative',
