@@ -8,13 +8,13 @@ import {
 } from 'react-native';
 import Movies from '../components/Movies';
 import Slider from '../components/Slider';
-import CarouselHeader from '../components/CarouselHeader';
 import MovieDetailModal from '../components/MovieDetailModal';
 import {useMovieModal} from '../context/MovieModalContext';
 import useTMDB from '../hooks/useTMDB';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../navigation/navigationTypes';
 import {MovieDetail} from '../interfaces/tmdb';
+import FMCard from '../components/FMCard';
 
 const Home = () => {
   const {state, dispatch} = useMovieModal();
@@ -51,6 +51,9 @@ const Home = () => {
     });
   };
 
+  const handleCheckDetails = () => {
+    console.log('Handle details');
+  };
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -96,6 +99,14 @@ const Home = () => {
           movie={state.movie!}
           isVisible={state.isVisible}
           onClose={() => dispatch({type: 'CLOSE_MODAL'})}
+        />
+        <FMCard
+          title={'Black friday is here!'}
+          description={
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra sociis pulvinar auctor nibh nibh iaculis id.'
+          }
+          textButton={'Check details'}
+          onPress={handleCheckDetails}
         />
       </ScrollView>
     </View>
