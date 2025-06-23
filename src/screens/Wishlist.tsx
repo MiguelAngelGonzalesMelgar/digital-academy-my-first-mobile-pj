@@ -4,9 +4,7 @@ import {ImageBackground, StyleSheet, Text, View} from 'react-native';
 const Whishlist = () => {
   return (
     <ImageBackground
-      source={{
-        uri: 'https://i0.wp.com/thehill.com/wp-content/uploads/sites/2/2022/05/e92ed228a6924420a8963bdc6c9ddef1.jpg?w=2000&ssl=1',
-      }}
+      source={require('../../assets/wlst.webp')}
       style={styles.backgroundImage}>
       <View style={styles.overlay} />
       <View style={styles.contentContainer}>
