@@ -1,8 +1,8 @@
 import React from 'react';
 import {TouchableOpacity, ViewStyle} from 'react-native';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useWishlist} from '../context/WishlistContext';
 import {Movie} from '../interfaces/tmdb';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface WishlistProps {
   item: Movie;
@@ -19,7 +19,11 @@ const AddToWishlist = ({item, style}: WishlistProps) => {
 
   return (
     <TouchableOpacity onPress={handlePress} style={style}>
-      <FontAwesome5 name="heart" solid={selected} color="#E3D947" size={24} />
+      <Icon
+        name={selected ? 'heart' : 'heart-outline'}
+        size={24}
+        color="#E3D947"
+      />
     </TouchableOpacity>
   );
 };
