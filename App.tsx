@@ -6,6 +6,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SeeMore from './src/screens/SeeMore';
 import Wishlist from './src/screens/Wishlist';
 import {WishlistProvider} from './src/context/WishlistContext';
+import {blackHeaderOptions} from './src/constants/navigationOptions';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,12 +28,12 @@ function App(): React.JSX.Element {
             <Stack.Screen
               name="SeeMore"
               component={SeeMore}
-              options={{headerShown: false}}
+              options={blackHeaderOptions}
             />
             <Stack.Screen
               name="Wishlist"
               component={Wishlist}
-              options={{headerShown: false}}
+              options={blackHeaderOptions}
             />
           </Stack.Navigator>
         </NavigationContainer>

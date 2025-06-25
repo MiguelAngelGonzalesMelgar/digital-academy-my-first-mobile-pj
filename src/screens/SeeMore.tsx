@@ -8,6 +8,8 @@ import {
 import {RootStackParamList} from '../navigation/navigationTypes';
 import FMButton from '../components/FMButton';
 import Movies from '../components/Movies';
+import {useMovieModal} from '../context/MovieModalContext';
+import MovieDetailModal from '../components/MovieDetailModal';
 
 type SeeMoreType = RouteProp<RootStackParamList, 'SeeMore'>;
 
@@ -15,6 +17,7 @@ const SeeMore = () => {
   const route = useRoute<SeeMoreType>();
   const {payload} = route.params;
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const {state, dispatch} = useMovieModal();
 
   const handleNavigation = () => {
     navigation.navigate('Wishlist');
@@ -23,6 +26,11 @@ const SeeMore = () => {
   return (
     <View style={styles.container}>
       <Movies movies={payload} isHorizontal={false} />
+      <MovieDetailModal
+        movie={state.movie!}
+        isVisible={state.isVisible}
+        onClose={() => dispatch({type: 'CLOSE_MODAL'})}
+      />
       <FMButton
         onPress={handleNavigation}
         style={styles.navButton}
