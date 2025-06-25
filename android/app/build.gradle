@@ -77,9 +77,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.firstmobile"
+    namespace "com.firstmobile"// TODO: cambiar nombre com.pentiumprime.firstmobile
     defaultConfig {
-        applicationId "com.firstmobile"
+        applicationId "com.firstmobile" // Aquí también.
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
