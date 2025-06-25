@@ -11,6 +11,7 @@ import {POSTER_BASE_URL} from '@env';
 import {MovieDetail} from '../interfaces/tmdb';
 import {useMovieModal} from '../context/MovieModalContext';
 import CarouselHeader from './CarouselHeader';
+import AddToWishlist from './AddToWishlist';
 
 interface MoviesProps {
   movies: MovieDetail[];
@@ -62,6 +63,7 @@ const Movies = ({
               {!floatingMovieTitle && item.title && (
                 <Text style={styles.floatingTitle}>{item.title} ⭐️</Text>
               )}
+              <AddToWishlist item={item} style={styles.wishlist} />
             </View>
             {floatingMovieTitle && item.title && (
               <Text style={styles.movieTitle}>{item.title}</Text>
@@ -118,6 +120,14 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     zIndex: 10,
     fontFamily: 'Gilroy-Medium',
+  },
+  wishlist: {
+    position: 'absolute',
+    right: 2,
+    top: 2,
+    backgroundColor: 'rgba(102, 102, 102, 0.6)',
+    borderRadius: 12,
+    padding: 5,
   },
 });
 
