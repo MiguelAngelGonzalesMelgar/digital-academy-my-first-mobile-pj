@@ -1,4 +1,4 @@
-package com.firstmobile
+package com.mag.firstmobile
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

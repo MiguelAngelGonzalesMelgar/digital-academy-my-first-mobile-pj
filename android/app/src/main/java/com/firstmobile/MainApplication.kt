@@ -1,4 +1,4 @@
-package com.firstmobile
+package com.mag.firstmobile
 
 import android.app.Application
 import com.facebook.react.PackageList

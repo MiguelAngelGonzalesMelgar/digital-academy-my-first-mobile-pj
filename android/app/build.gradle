@@ -77,9 +77,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.firstmobile"// TODO: cambiar nombre com.pentiumprime.firstmobile
+    namespace "com.mag.firstmobile"// TODO: cambiar nombre com.pentiumprime.firstmobile
     defaultConfig {
-        applicationId "com.firstmobile" // Aquí también.
+        applicationId "com.mag.firstmobile" // Aquí también.
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -92,6 +92,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+        storeFile file("$rootDir/app/grupo-1-release-key.keystore")
+        storePassword "firstmobile"
+        keyAlias "my-key-alias"
+        keyPassword "firstmobile"
+    }
     }
     buildTypes {
         debug {
@@ -100,9 +106,9 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
-            minifyEnabled enableProguardInReleaseBuilds
-            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+           signingConfig signingConfigs.release
+        minifyEnabled enableProguardInReleaseBuilds
+        proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
 }
