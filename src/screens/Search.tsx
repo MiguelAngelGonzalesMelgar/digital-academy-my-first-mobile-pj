@@ -1,22 +1,77 @@
-import React, {useState} from 'react';
-import {View, TextInput, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  FlatList,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import useTMDB from '../hooks/useTMDB';
+import MovieCard from '../components/MovieCard';
+import MovieDetailModal from '../components/MovieDetailModal';
+import {useMovieModal} from '../context/MovieModalContext';
 
-const Search = () => {
-  const [searchText, setSearchText] = useState('');
+const SearchScreen = () => {
+  const [query, setQuery] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
 
-  const handleSearch = (text: string) => {
-    setSearchText(text);
-  };
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (query.length >= 3) {
+        setDebouncedQuery(query);
+      } else {
+        setDebouncedQuery('');
+      }
+    }, 500);
+    return () => clearTimeout(timeoutId);
+  }, [query]);
+
+  const {movies: searchMovies, loading: isLoading} = useTMDB(
+    debouncedQuery ? '/search/movie' : '',
+    debouncedQuery ? {query: debouncedQuery} : {},
+  );
+
+  const {state, dispatch} = useMovieModal();
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Search your favorite movie..."
-        placeholderTextColor="#888"
-        value={searchText}
-        onChangeText={handleSearch}
-        autoCapitalize="none"
+      <Text style={styles.title}>Search</Text>
+
+      <View style={styles.searchContainer}>
+        <Ionicons name="search" size={20} color="#aaa" style={styles.icon} />
+        <TextInput
+          style={styles.input}
+          value={query}
+          onChangeText={setQuery}
+          placeholder="Search movies..."
+          placeholderTextColor="#888"
+        />
+      </View>
+
+      {isLoading ? (
+        <ActivityIndicator size="large" color="#F3C15D" style={styles.loader} />
+      ) : (
+        <FlatList
+          data={searchMovies}
+          keyExtractor={item => item.id.toString()}
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
+          contentContainerStyle={styles.list}
+          columnWrapperStyle={styles.columnWrapper}
+          renderItem={({item}) => <MovieCard movie={item} />}
+          ListEmptyComponent={
+            debouncedQuery ? (
+              <Text style={styles.empty}>No results found</Text>
+            ) : null
+          }
+        />
+      )}
+      <MovieDetailModal
+        isVisible={state.isVisible}
+        movie={state.movie!}
+        onClose={() => dispatch({type: 'CLOSE_MODAL'})}
       />
     </View>
   );
@@ -25,22 +80,49 @@ const Search = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
-    padding: 16,
-    paddingTop: 70,
+    backgroundColor: '#000',
+    paddingHorizontal: 16,
+    paddingTop: 40,
+  },
+  title: {
+    color: '#fff',
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#1a1a1a',
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    marginBottom: 20,
+  },
+  icon: {
+    marginRight: 8,
   },
   input: {
-    height: 45,
-    borderColor: '#333',
-    borderWidth: 1,
-    borderRadius: 25,
-    paddingHorizontal: 15,
-    marginBottom: 30,
+    flex: 1,
     color: '#fff',
-    backgroundColor: '#1c1c1e',
     fontSize: 16,
-    fontFamily: 'Gilroy-Regular',
+  },
+  list: {
+    paddingBottom: 16,
+  },
+  columnWrapper: {
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  loader: {
+    marginTop: 50,
+  },
+  empty: {
+    color: '#888',
+    textAlign: 'center',
+    marginTop: 40,
+    fontSize: 16,
   },
 });
 
-export default Search;
+export default SearchScreen;
