@@ -161,3 +161,10 @@ For more detail visit [TMDB-docs](https://developer.themoviedb.org/docs/getting-
 **Remember to add your .env variables**, check the .env.example
 
 Please feel free to contribute to this project.
+
+
+# Releases
+
+If you would like to test or debug the app I've published a release with the .aab file and also included the apk.
+
+[click here: v.0.0.1]("https://github.com/MiguelAngelGonzalesMelgar/digital-academy-my-first-mobile-pj/releases/tag/v.0.0.1)
